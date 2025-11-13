@@ -6,21 +6,18 @@ spring:
     name: config-server
 
   profiles:
-    active: native, git
+    active: git
 
   cloud:
     config:
       server:
-        native:
-          search-locations: 'file:///Users/yejin/Documents/msa/project-configs'
         git:
           uri: https://github.com/Yejin-source/project-configs
           default-label: main
           search-paths:
-            - configs
-            - configs/*
-          basedir: configs_cache
-          clone-on-start: true
+            - configs/common
+            - configs/{application}/{profile}
+            - configs/{application}
 
 eureka:
   instance:
