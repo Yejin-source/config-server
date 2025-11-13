@@ -1,0 +1,34 @@
+server:
+  port: 3100
+
+spring:
+  application:
+    name: config-server
+
+  profiles:
+    active: native, git
+
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: 'file:///Users/yejin/Documents/msa/project-configs'
+        git:
+          uri: https://github.com/Yejin-source/project-configs
+          default-label: main
+          search-paths:
+            - configs
+            - configs/*
+          basedir: configs_cache
+          clone-on-start: true
+
+eureka:
+  instance:
+    prefer-ip-address: false
+    hostname: localhost
+
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:3150/eureka/
